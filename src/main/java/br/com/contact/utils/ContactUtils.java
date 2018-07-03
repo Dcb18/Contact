@@ -17,7 +17,7 @@ public class ContactUtils {
 		
 		if((ContactType.WHATSAPP.equals(contact.getContactType())|| ContactType.PHONE.equals(contact.getContactType()) 
 				&& contact.getPhoneContact() == null)) {
-			throw new BadRequestException(request, causeEmail);
+			throw new BadRequestException(request, causePhone);
 		}
 
 	}

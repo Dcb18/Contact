@@ -5,6 +5,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,7 +20,7 @@ public class People {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "people_id")
+	@Column(name = "id_people", unique = true, nullable = false)
 	private Long idPeople;
 
 	@NotNull(message = "people name can't be null")
@@ -31,9 +32,11 @@ public class People {
 	@Column(name = "age")
 	private Integer age;
 
-	@OneToMany(mappedBy = "idContact", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "people", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(name = "people_contact_id")
 	private Set<Contact> peopleContact;
+	
+	
 
 	public People() {
 	}

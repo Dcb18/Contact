@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.contact.model.Contact;
-import br.com.contact.model.People;
 import br.com.contact.service.ContactService;
 
 @RestController

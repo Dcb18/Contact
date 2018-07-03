@@ -13,7 +13,7 @@ public class PhoneValidator implements ConstraintValidator<PhoneValidatorAnnotat
 
 	@Override
 	public boolean isValid(String contact, ConstraintValidatorContext arg1) {
-		return contact != null && contact.matches("[0-9]+") && (contact.length() > 8) && (contact.length() < 14);
+		return contact == null ||( contact != null && contact.matches("[0-9]+") && (contact.length() > 7) && (contact.length() < 14));
 	}
 
 }

@@ -5,9 +5,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.contact.annotation.PhoneValidatorAnnotation;
 import br.com.contact.model.enums.ContactType;
@@ -15,29 +19,44 @@ import br.com.contact.model.enums.ContactType;
 @Entity
 @Table(name = "contact")
 public class Contact {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "contact_id")
+	@Column(name = "id_contact", unique = true, nullable = false)
 	private Long idContact;
 
-	@Column(name = "email_contact")
 	@Email
-	private String Emailcontact;
+	@Column(name = "email_contact")
+	private String emailcontact;
 
-	@Column(name = "phone_contact")
 	@PhoneValidatorAnnotation
+	@Column(name = "phone_contact")
 	private String phoneContact;
 
 	@NotNull(message = "You must inform the contact type")
 	@Column(name = "contact_type")
 	private ContactType contactType;
 
+	@ManyToOne
+	@JoinColumn(name = "id_people")
+	@JsonIgnore
+	private People people;
+
+	
+	public People getPeople() {
+		return people;
+	}
+
+	public void setPeople(People people) {
+		this.people = people;
+	}
+
 	public String getEmailcontact() {
-		return Emailcontact;
+		return emailcontact;
 	}
 
 	public void setEmailcontact(String emailcontact) {
-		Emailcontact = emailcontact;
+		this.emailcontact = emailcontact;
 	}
 
 	public String getPhoneContact() {
